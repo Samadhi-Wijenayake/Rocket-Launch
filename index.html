@@ -2,111 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>🚀 Rocket Launch - Weighted Crash Game | Creator's Edge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>🚀 Rocket Launch - Mobile Crash Game | Creator's Edge</title>
     <style>
         * {
             box-sizing: border-box;
-            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background: linear-gradient(145deg, #0a0f1e 0%, #0b1525 100%);
-            font-family: 'Segoe UI', 'Orbitron', 'Poppins', system-ui, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, 'Poppins', sans-serif;
             margin: 0;
             min-height: 100vh;
-            padding: 24px 20px;
+            padding: 16px 12px;
             color: #eef5ff;
         }
 
         .app-container {
-            max-width: 1400px;
+            max-width: 800px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
         }
 
+        /* Game panel - mobile first */
         .game-panel {
             background: rgba(10, 20, 35, 0.75);
             backdrop-filter: blur(12px);
-            border-radius: 56px;
+            border-radius: 32px;
             border: 1px solid rgba(0, 255, 255, 0.3);
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
-            padding: 24px 28px;
+            padding: 16px;
         }
 
         .rocket-zone {
             background: #03060e;
-            border-radius: 48px;
-            padding: 20px;
-            margin-bottom: 24px;
+            border-radius: 28px;
+            padding: 16px;
+            margin-bottom: 20px;
             border-bottom: 2px solid #0ff3;
-            box-shadow: inset 0 0 20px #00aaff10;
         }
 
         canvas {
             display: block;
             width: 100%;
-            height: 200px;
+            height: auto;
+            max-height: 180px;
             background: radial-gradient(circle at 30% 20%, #0a1428, #000000);
-            border-radius: 32px;
-            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
         }
 
         .multiplier-glass {
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 800;
             text-align: center;
-            font-family: 'Orbitron', monospace;
-            text-shadow: 0 0 12px cyan;
-            letter-spacing: 4px;
+            font-family: monospace;
+            text-shadow: 0 0 10px cyan;
             background: linear-gradient(135deg, #f0f9ff, #7df9ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-top: 12px;
+            margin-top: 8px;
+            letter-spacing: 2px;
         }
 
         .crash-alert {
             text-align: center;
             font-weight: bold;
-            padding: 8px;
-            border-radius: 60px;
+            padding: 6px 10px;
+            border-radius: 40px;
             background: #ff1e4d20;
+            font-size: 0.85rem;
             backdrop-filter: blur(4px);
         }
 
         .bet-panel {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
-            align-items: flex-end;
-            margin: 20px 0 15px;
+            gap: 12px;
+            align-items: center;
+            margin: 15px 0 10px;
             background: #07121f80;
-            padding: 18px 20px;
-            border-radius: 48px;
+            padding: 15px;
+            border-radius: 40px;
         }
 
         .bet-input-group {
             flex: 2;
-            min-width: 150px;
+            min-width: 120px;
         }
 
         .bet-input-group label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
             color: #7fdbff;
         }
 
         .bet-input {
             background: #0e1a2a;
             border: 1px solid #2c5f7a;
-            padding: 12px 18px;
-            border-radius: 40px;
+            padding: 10px 12px;
+            border-radius: 30px;
             width: 100%;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: bold;
             color: #f0fcff;
             font-family: monospace;
@@ -114,38 +114,39 @@
 
         .quick-btns {
             display: flex;
-            gap: 12px;
-            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .quick-btn {
             background: #1e2f44;
             border: none;
             border-radius: 30px;
-            padding: 8px 20px;
+            padding: 6px 14px;
             font-weight: bold;
             color: white;
             cursor: pointer;
-            transition: 0.1s linear;
+            font-size: 0.9rem;
+            transition: 0.1s;
         }
 
-        .quick-btn:hover {
-            background: #2f4b6e;
+        .quick-btn:active {
             transform: scale(0.96);
         }
 
         button {
             background: linear-gradient(95deg, #ff8c00, #ff2e6e);
             border: none;
-            border-radius: 60px;
-            padding: 12px 28px;
+            border-radius: 50px;
+            padding: 10px 20px;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: white;
             cursor: pointer;
-            box-shadow: 0 5px 0 #7a2e4a;
+            box-shadow: 0 4px 0 #7a2e4a;
             transition: 0.07s linear;
             font-family: inherit;
+            min-width: 120px;
         }
 
         button:active {
@@ -162,57 +163,59 @@
         .cashout-btn {
             background: linear-gradient(95deg, #00c9ff, #92fe9e);
             color: #011522;
-            box-shadow: 0 5px 0 #008060;
-            font-weight: 800;
+            box-shadow: 0 4px 0 #008060;
         }
 
         .balance-box {
             background: #00000066;
             border-radius: 40px;
-            padding: 10px 20px;
+            padding: 8px 16px;
             text-align: right;
             font-weight: bold;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-family: monospace;
+            white-space: nowrap;
         }
 
+        /* Admin section - horizontal scroll on mobile */
         .admin-section {
             background: #07121fd9;
             backdrop-filter: blur(8px);
-            border-radius: 40px;
+            border-radius: 28px;
             border-left: 4px solid cyan;
-            padding: 20px;
+            padding: 16px;
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .admin-title {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
             border-bottom: 1px dashed cyan;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
+            flex-wrap: wrap;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             font-family: monospace;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            min-width: 600px;
         }
 
         th, td {
-            padding: 12px 8px;
+            padding: 8px 6px;
             text-align: left;
             border-bottom: 1px solid #2c4f6e;
         }
 
         th {
             color: #7df9ff;
-            font-weight: 700;
         }
 
         .status-cashed { color: #a3ffb0; }
@@ -221,9 +224,43 @@
 
         footer {
             text-align: center;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             opacity: 0.6;
             margin-top: 10px;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 550px) {
+            body {
+                padding: 12px 8px;
+            }
+            .bet-panel {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .quick-btns {
+                justify-content: center;
+            }
+            button {
+                width: 100%;
+            }
+            .balance-box {
+                text-align: center;
+            }
+            .multiplier-glass {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .quick-btn {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            th, td {
+                font-size: 0.7rem;
+                padding: 6px 4px;
+            }
         }
     </style>
 </head>
@@ -232,9 +269,9 @@
 <div class="app-container">
     <div class="game-panel">
         <div class="rocket-zone">
-            <canvas id="rocketCanvas" width="800" height="200" style="width:100%; height:200px"></canvas>
+            <canvas id="rocketCanvas" width="800" height="200" style="width:100%; height:auto; max-height:180px"></canvas>
             <div class="multiplier-glass" id="multiplierDisplay">1.00x</div>
-            <div id="roundStatus" class="crash-alert">⚡ Weighted crash distribution – creator's edge active ⚡</div>
+            <div id="roundStatus" class="crash-alert">⚡ Weighted crash – creator's edge active ⚡</div>
         </div>
 
         <div class="bet-panel">
@@ -248,47 +285,36 @@
                 <button class="quick-btn" data-bet="10">+10</button>
                 <button class="quick-btn" data-bet="25">+25</button>
             </div>
-            <button id="launchBtn">🚀 LAUNCH ROCKET</button>
+            <button id="launchBtn">🚀 LAUNCH</button>
             <button id="cashoutBtn" class="cashout-btn" disabled>💸 CASH OUT</button>
             <div class="balance-box">
                 💰 BALANCE: <span id="playerBalance">100.00</span>
             </div>
         </div>
-       
     </div>
 
     <div class="admin-section">
         <div class="admin-title">
             <span>🛸 ADMIN INTERFACE — LIVE MONITOR</span>
-            <span style="font-size:12px;">(house edge via weighted blast)</span>
+            <span style="font-size:10px;">(house edge via weighted blast)</span>
         </div>
         <div style="overflow-x: auto;">
             <table id="playersTable">
-                <thead><tr><th>Player</th><th>💸 Bet</th><th>🎯 Cashed at</th><th>📊 Status</th><th>🏆 Profit</th><th>💰 Balance</th></tr></thead>
+                <thead>
+                    <tr><th>Player</th><th>💸 Bet</th><th>🎯 Cashed at</th><th>📊 Status</th><th>🏆 Profit</th><th>💰 Balance</th></tr>
+                </thead>
                 <tbody id="playersTableBody"></tbody>
             </table>
         </div>
     </div>
-   
+    <!--<footer>⚠️ Weighted distribution: 60% crashes <2.5x → house edge ~8-10% | Touch friendly</footer>
+    -->
 </div>
 
 <script>
     // ==================================================================
-    //  ADVANCED BLAST CALCULATION WITH WEIGHTED DISTRIBUTION & MAX_CRASH
+    //  WEIGHTED BLAST CALCULATION (FAVORS CREATOR)
     // ==================================================================
-    /**
-     * Calculates the crash multiplier using a weighted distribution that favors the creator.
-     * - Low multipliers (1.01 - 2.5): 60% probability
-     * - Medium (2.5 - 6.0): 25% probability
-     * - High (6.0 - 20.0): 12% probability
-     * - Very High (20.0 - maxCrash): 3% probability
-     * 
-     * This ensures the expected multiplier is significantly lower than what a uniform distribution would give.
-     * The house edge is built directly into the distribution shape.
-     *
-     * @param {number} maxCrash - Maximum possible multiplier (e.g., 30, 40, 50)
-     * @returns {number} Crash point between 1.01 and maxCrash
-     */
     function calculateWeightedBlastPoint(maxCrash = 30) {
         const MIN_CRASH = 1.01;
         const r = Math.random();
@@ -307,12 +333,7 @@
             crash = 20 + Math.random() * (maxCrash - 20);
         }
 
-        // Final safety clamp
         crash = Math.min(maxCrash, Math.max(MIN_CRASH, crash));
-        
-        // Optional: Add a tiny extra house nudge (multiply by 0.98) for even more edge
-        // crash = crash * 0.98;
-        
         return parseFloat(crash.toFixed(3));
     }
 
@@ -321,10 +342,10 @@
     // ======================
     const INITIAL_BALANCE = 100;
     const MIN_BET = 0.5;
-    const MAX_CRASH_LIMIT = 30;   // can be changed to 40 or 50
+    const MAX_CRASH_LIMIT = 30;
 
     let players = [
-        { id: "p1", name: "🚀 ROCKET_MASTER (YOU)", type: "human", balance: INITIAL_BALANCE, roundBet: 0, cashedOut: false, cashoutMult: null, targetMult: null },
+        { id: "p1", name: "🚀 YOU", type: "human", balance: INITIAL_BALANCE, roundBet: 0, cashedOut: false, cashoutMult: null, targetMult: null },
         { id: "p2", name: "🤖 ASTRO_BOT", type: "ai", balance: 85.0, roundBet: 0, cashedOut: false, cashoutMult: null, targetMult: null },
         { id: "p3", name: "🛸 NEBULA_BOT", type: "ai", balance: 72.5, roundBet: 0, cashedOut: false, cashoutMult: null, targetMult: null }
     ];
@@ -346,60 +367,33 @@
     const playerBalanceSpan = document.getElementById('playerBalance');
     const playersTableBody = document.getElementById('playersTableBody');
 
-    // Helper: update UI
     function updateHumanBalanceUI() {
         const human = players.find(p => p.type === "human");
         if (human) playerBalanceSpan.innerText = human.balance.toFixed(2);
     }
 
-    // Render admin table
     function renderAdminTable() {
         playersTableBody.innerHTML = '';
         for (let player of players) {
             const row = document.createElement('tr');
-            const nameCell = document.createElement('td');
-            nameCell.className = 'player-badge';
-            nameCell.innerText = player.name;
-            const betCell = document.createElement('td');
-            betCell.innerText = player.roundBet > 0 ? player.roundBet.toFixed(2) : '—';
-            const cashMultCell = document.createElement('td');
-            if (player.cashedOut && player.cashoutMult !== null) cashMultCell.innerText = player.cashoutMult.toFixed(2) + 'x';
-            else cashMultCell.innerText = '—';
-            const statusCell = document.createElement('td');
-            let statusText = '';
-            if (!gameActive && !roundEnded) statusText = '⏳ idle';
-            else if (gameActive && !player.cashedOut && player.roundBet > 0) statusText = '🚀 flying';
-            else if (player.cashedOut) statusText = '✅ CASHED OUT';
-            else if (roundEnded && !player.cashedOut && player.roundBet > 0) statusText = '💥 CRASHED';
-            else if (player.roundBet === 0) statusText = '⚡ no bet';
-            else statusText = '⌛ waiting';
-            statusCell.innerText = statusText;
-            if (statusText.includes('CASHED')) statusCell.className = 'status-cashed';
-            else if (statusText.includes('CRASHED')) statusCell.className = 'status-crashed';
-            else statusCell.className = 'status-waiting';
-
-            const profitCell = document.createElement('td');
-            let profitVal = 0;
-            if (player.cashedOut && player.cashoutMult && player.roundBet) {
-                profitVal = (player.roundBet * player.cashoutMult) - player.roundBet;
-                profitCell.innerText = `+${profitVal.toFixed(2)}`;
-                profitCell.style.color = '#a3ffb0';
-            } else if (roundEnded && !player.cashedOut && player.roundBet > 0 && gameActive === false) {
-                profitVal = -player.roundBet;
-                profitCell.innerText = `${profitVal.toFixed(2)}`;
-                profitCell.style.color = '#ff8888';
-            } else if (player.roundBet === 0) profitCell.innerText = '0.00';
-            else profitCell.innerText = 'pending';
-            
-            const balanceCell = document.createElement('td');
-            balanceCell.innerText = player.balance.toFixed(2);
-            
-            row.appendChild(nameCell);
-            row.appendChild(betCell);
-            row.appendChild(cashMultCell);
-            row.appendChild(statusCell);
-            row.appendChild(profitCell);
-            row.appendChild(balanceCell);
+            row.innerHTML = `
+                <td class="player-badge">${player.name}</td>
+                <td>${player.roundBet > 0 ? player.roundBet.toFixed(2) : '—'}</td>
+                <td>${player.cashedOut && player.cashoutMult ? player.cashoutMult.toFixed(2) + 'x' : '—'}</td>
+                <td class="${player.cashedOut ? 'status-cashed' : (roundEnded && !player.cashedOut && player.roundBet > 0 ? 'status-crashed' : 'status-waiting')}">
+                    ${!gameActive && !roundEnded ? '⏳ idle' : 
+                      (gameActive && !player.cashedOut && player.roundBet > 0 ? '🚀 flying' :
+                       (player.cashedOut ? '✅ CASHED OUT' :
+                        (roundEnded && !player.cashedOut && player.roundBet > 0 ? '💥 CRASHED' :
+                         (player.roundBet === 0 ? '⚡ no bet' : '⌛ waiting'))))}
+                </td>
+                <td style="${player.cashedOut && player.cashoutMult ? 'color:#a3ffb0' : (roundEnded && !player.cashedOut && player.roundBet > 0 ? 'color:#ff8888' : '')}">
+                    ${player.cashedOut && player.cashoutMult && player.roundBet ? `+${(player.roundBet * player.cashoutMult - player.roundBet).toFixed(2)}` :
+                      (roundEnded && !player.cashedOut && player.roundBet > 0 ? `-${player.roundBet.toFixed(2)}` :
+                       (player.roundBet === 0 ? '0.00' : 'pending'))}
+                </td>
+                <td>${player.balance.toFixed(2)}</td>
+            `;
             playersTableBody.appendChild(row);
         }
     }
@@ -414,14 +408,11 @@
     }
 
     function getAITarget() {
-        // AI targets are modest, they rarely chase high multipliers
-        return 1.2 + Math.random() * 4.5;  // max ~5.7x
+        return 1.2 + Math.random() * 4.5;
     }
 
     function cashoutPlayer(player, multAtCashout) {
-        if (!gameActive) return false;
-        if (player.cashedOut) return false;
-        if (player.roundBet <= 0) return false;
+        if (!gameActive || player.cashedOut || player.roundBet <= 0) return false;
         const winAmount = player.roundBet * multAtCashout;
         player.balance += winAmount;
         player.cashedOut = true;
@@ -431,13 +422,10 @@
 
     function endRound() {
         if (!gameActive && roundEnded) return;
-        if (intervalId) {
-            clearInterval(intervalId);
-            intervalId = null;
-        }
+        if (intervalId) clearInterval(intervalId);
         gameActive = false;
         roundEnded = true;
-        roundStatusDiv.innerHTML = `💥 ROCKET CRASHED AT ${currentMultiplier.toFixed(2)}x ! 💥`;
+        roundStatusDiv.innerHTML = `💥 CRASHED at ${currentMultiplier.toFixed(2)}x ! 💥`;
         roundStatusDiv.style.background = "#ff1e4d40";
         cashoutBtn.disabled = true;
         launchBtn.disabled = false;
@@ -450,10 +438,8 @@
     function processAICashouts() {
         if (!gameActive) return;
         for (let p of players) {
-            if (p.type === "ai" && !p.cashedOut && p.roundBet > 0 && p.targetMult !== null) {
-                if (currentMultiplier >= p.targetMult) {
-                    cashoutPlayer(p, currentMultiplier);
-                }
+            if (p.type === "ai" && !p.cashedOut && p.roundBet > 0 && p.targetMult !== null && currentMultiplier >= p.targetMult) {
+                cashoutPlayer(p, currentMultiplier);
             }
         }
         renderAdminTable();
@@ -465,7 +451,7 @@
         const humanPlayer = players.find(p => p.type === "human");
         let betVal = parseFloat(userBetAmount);
         if (isNaN(betVal) || betVal < MIN_BET) {
-            roundStatusDiv.innerHTML = "⚠️ Minimum bet: 0.5 credits!";
+            roundStatusDiv.innerHTML = "⚠️ Min bet: 0.5 credits!";
             return false;
         }
         if (betVal > humanPlayer.balance) {
@@ -476,38 +462,29 @@
         if (intervalId) clearInterval(intervalId);
         resetRoundPlayerData();
         
-        // Human bet
         humanPlayer.balance -= betVal;
         humanPlayer.roundBet = betVal;
         humanPlayer.cashedOut = false;
-        humanPlayer.cashoutMult = null;
-        humanPlayer.targetMult = null;
         
-        // AI bets
         for (let p of players) {
-            if (p.type === "ai") {
-                if (p.balance >= 1.2) {
-                    let aiBet = Math.min(p.balance - 0.5, Math.max(1.2, (Math.random() * 11) + 1));
-                    aiBet = Math.floor(aiBet * 100) / 100;
-                    if (aiBet > p.balance) aiBet = p.balance * 0.9;
-                    if (aiBet < 1) aiBet = 1;
-                    p.balance -= aiBet;
-                    p.roundBet = aiBet;
-                    p.cashedOut = false;
-                    p.cashoutMult = null;
-                    p.targetMult = getAITarget();
-                } else {
-                    p.roundBet = 0;
-                    p.targetMult = null;
-                }
+            if (p.type === "ai" && p.balance >= 1.2) {
+                let aiBet = Math.min(p.balance - 0.5, Math.max(1.2, (Math.random() * 11) + 1));
+                aiBet = Math.floor(aiBet * 100) / 100;
+                if (aiBet > p.balance) aiBet = p.balance * 0.9;
+                if (aiBet < 1) aiBet = 1;
+                p.balance -= aiBet;
+                p.roundBet = aiBet;
+                p.cashedOut = false;
+                p.targetMult = getAITarget();
+            } else if (p.type === "ai") {
+                p.roundBet = 0;
+                p.targetMult = null;
             }
         }
         
-        // ***** USE WEIGHTED BLAST FUNCTION WITH MAX_CRASH_LIMIT *****
         crashPoint = calculateWeightedBlastPoint(MAX_CRASH_LIMIT);
-        
         currentMultiplier = 1.00;
-        multiplierSpan.innerText = currentMultiplier.toFixed(2) + "x";
+        multiplierSpan.innerText = "1.00x";
         gameActive = true;
         roundEnded = false;
         
@@ -515,7 +492,7 @@
         launchBtn.disabled = true;
         betInput.disabled = true;
         
-        roundStatusDiv.innerHTML = `🚀 ROCKET LAUNCH! Max crash ${MAX_CRASH_LIMIT}x, weighted distribution active. Crash target: ${crashPoint.toFixed(2)}x 🚀`;
+        roundStatusDiv.innerHTML = `🚀 LAUNCH! Max ${MAX_CRASH_LIMIT}x, crash @ ${crashPoint.toFixed(2)}x 🚀`;
         roundStatusDiv.style.background = "#00aaff20";
         
         renderAdminTable();
@@ -524,8 +501,7 @@
         
         intervalId = setInterval(() => {
             if (!gameActive) return;
-            let increment = 0.025;
-            currentMultiplier += increment;
+            currentMultiplier += 0.025;
             currentMultiplier = parseFloat(currentMultiplier.toFixed(3));
             multiplierSpan.innerText = currentMultiplier.toFixed(2) + "x";
             
@@ -536,13 +512,7 @@
             
             processAICashouts();
             const human = players.find(p => p.type === "human");
-            if (human && human.cashedOut) {
-                cashoutBtn.disabled = true;
-            } else if (gameActive && human && human.roundBet > 0 && !human.cashedOut) {
-                cashoutBtn.disabled = false;
-            } else {
-                cashoutBtn.disabled = true;
-            }
+            cashoutBtn.disabled = !(gameActive && human && !human.cashedOut && human.roundBet > 0);
             drawCanvas();
             renderAdminTable();
             updateHumanBalanceUI();
@@ -553,9 +523,8 @@
     function humanCashout() {
         const human = players.find(p => p.type === "human");
         if (!gameActive || !human || human.cashedOut || human.roundBet <= 0) return;
-        const success = cashoutPlayer(human, currentMultiplier);
-        if (success) {
-            roundStatusDiv.innerHTML = `🎉 YOU CASHED OUT at ${currentMultiplier.toFixed(2)}x! +${(human.roundBet * currentMultiplier - human.roundBet).toFixed(2)} credits 🎉`;
+        if (cashoutPlayer(human, currentMultiplier)) {
+            roundStatusDiv.innerHTML = `🎉 CASHED OUT at ${currentMultiplier.toFixed(2)}x! +${(human.roundBet * currentMultiplier - human.roundBet).toFixed(2)} credits 🎉`;
             roundStatusDiv.style.background = "#00c9ff30";
             renderAdminTable();
             updateHumanBalanceUI();
@@ -564,24 +533,24 @@
         }
     }
     
-    // Canvas drawing (rocket animation)
+    // Canvas drawing (responsive)
     function drawCanvas(isCrashed = false) {
         if (!ctx) return;
         const width = canvas.clientWidth;
-        const height = 200;
+        const height = 180; // fixed height for consistency
         canvas.width = width;
         canvas.height = height;
         ctx.clearRect(0, 0, width, height);
         ctx.fillStyle = "#010514";
         ctx.fillRect(0, 0, width, height);
-        for(let i=0;i<80;i++) {
+        for(let i=0;i<60;i++) {
             ctx.fillStyle = `rgba(255,240,200,${Math.random()*0.5})`;
             ctx.fillRect( (i*131)%width, (i*57)%height, 1.5, 1.5);
         }
         ctx.fillStyle = "#4a6572";
         ctx.fillRect(0, height-18, width, 18);
         ctx.fillStyle = "#edb16b";
-        ctx.fillRect(width/2-35, height-22, 70, 8);
+        ctx.fillRect(width/2-30, height-22, 60, 8);
         
         let progress = Math.min(1.0, currentMultiplier / 10.0);
         if (isCrashed && !gameActive) progress = Math.min(1.0, (crashPoint / 10.0));
@@ -619,23 +588,21 @@
         ctx.arc(width/2+2, rocketY, 1.5, 0, Math.PI*2);
         ctx.fill();
         
-        ctx.font = "bold 16px 'Orbitron'";
+        ctx.font = "bold 14px 'Orbitron'";
         ctx.fillStyle = "#ddffff";
-        ctx.fillText(`${currentMultiplier.toFixed(2)}x`, width-70, 35);
+        ctx.fillText(`${currentMultiplier.toFixed(2)}x`, width-60, 30);
+        ctx.font = "bold 10px monospace";
         ctx.fillStyle = "#ffd966";
-        ctx.font = "bold 12px monospace";
-        if (gameActive) ctx.fillText("🚀 RISING", 15, 40);
-        else ctx.fillText("💥 CRASH ZONE", 15, 40);
+        if (gameActive) ctx.fillText("🚀 RISING", 10, 30);
+        else ctx.fillText("💥 CRASH ZONE", 10, 30);
     }
     
     function setupQuickButtons() {
-        const btns = document.querySelectorAll('.quick-btn');
-        btns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.quick-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
                 if (gameActive) return;
                 let addVal = parseFloat(btn.getAttribute('data-bet'));
-                let currentBet = parseFloat(betInput.value);
-                if (isNaN(currentBet)) currentBet = 0;
+                let currentBet = parseFloat(betInput.value) || 0;
                 let newBet = currentBet + addVal;
                 const human = players.find(p => p.type === "human");
                 if (human && newBet > human.balance) newBet = human.balance;
@@ -646,17 +613,12 @@
     }
     
     function bindEvents() {
-        launchBtn.addEventListener('click', () => {
+        launchBtn.onclick = () => {
             if (gameActive) return;
-            let betVal = parseFloat(betInput.value);
-            if (isNaN(betVal)) betVal = MIN_BET;
-            startRound(betVal);
-        });
-        cashoutBtn.addEventListener('click', () => {
-            if (!gameActive) return;
-            humanCashout();
-        });
-        betInput.addEventListener('change', () => {
+            startRound(betInput.value);
+        };
+        cashoutBtn.onclick = humanCashout;
+        betInput.onchange = () => {
             if (gameActive) return;
             let val = parseFloat(betInput.value);
             const human = players.find(p => p.type === "human");
@@ -664,20 +626,15 @@
             if (human && val > human.balance) val = human.balance;
             if (val < MIN_BET) val = MIN_BET;
             betInput.value = val.toFixed(2);
-        });
+        };
     }
     
     function startAutoRefresh() {
         setInterval(() => {
-            if (!gameActive) {
-                renderAdminTable();
-                updateHumanBalanceUI();
-            } else {
-                renderAdminTable();
-                updateHumanBalanceUI();
-            }
+            renderAdminTable();
+            updateHumanBalanceUI();
             drawCanvas();
-        }, 180);
+        }, 200);
     }
     
     function init() {
@@ -688,7 +645,9 @@
         renderAdminTable();
         drawCanvas();
         startAutoRefresh();
-        roundStatusDiv.innerHTML = "";
+        roundStatusDiv.innerHTML = "⚡ Weighted crash distribution – creator's edge active ⚡";
+        // Handle resize to redraw canvas properly
+        window.addEventListener('resize', () => drawCanvas());
     }
     
     init();
